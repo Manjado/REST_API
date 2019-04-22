@@ -20,6 +20,13 @@ app.use((req, res, next) => {
 
 app.use('/feed', feedRoutes);
 
+app.use((error, req, res, next) => {
+    console.log(error);
+    const status = error.statusCode || 500;
+    const message = error.message;
+    res.status(status).join({ message: message });
+});
+
 mongoose
     .connect(
      'mongodb+srv://Michael:b8sSmwk7I7wz7hpf@cluster0-flk3y.mongodb.net/blog'
