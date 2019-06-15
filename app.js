@@ -68,6 +68,10 @@ mongoose
      'mongodb+srv://Michael:b8sSmwk7I7wz7hpf@cluster0-flk3y.mongodb.net/blog'
     )
     .then(result => {
-        app.listen(8080);
+       const server =  app.listen(8080);
+       const io = require('socket.io')(server);
+       io.on('connection', socket => {
+           console.log('Client connected');
+       });
     }).catch(err => console.log(err));
 
